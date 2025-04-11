@@ -25,9 +25,9 @@ def upload():
         return redirect(request.url)
     
     try:
-        # Read the CSV file. We assume the CSV has columns: datetime, total_price, business_name.
-        df = pd.read_csv(file, parse_dates=["datetime"])
-        df['datetime'] = pd.to_datetime(df['datetime'])
+        # Read the CSV file. We assume the CSV has columns: date, total_price, business_name.
+        df = pd.read_csv(file, parse_dates=["date"])
+        df['datetime'] = pd.to_datetime(df['date'])
         
         # Determine aggregation type based on form selection: day or month.
         agg_by = request.form.get('aggregation', 'day')
