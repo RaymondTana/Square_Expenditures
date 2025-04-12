@@ -422,14 +422,12 @@
 import dash
 from dash import html
 
-# Create the Dash app.
+# Create your Dash app.
 app = dash.Dash(__name__)
+app.layout = html.Div("Hello from Dash!")
+
 # Explicitly expose the underlying Flask server.
 server = app.server
 
-# Define the app layout.
-app.layout = html.Div("Hello from Dash!")
-
-# For local development.
 if __name__ == "__main__":
-    app.run_server(debug=False)
+    app.run_server(debug=True)
