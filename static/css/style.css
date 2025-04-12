@@ -1,0 +1,137 @@
+.content-div {
+    padding : 20px 0px 0px 0px;
+}
+
+.valid-div {
+    display: none;
+}
+
+.plots-div {
+    padding : 10px 0px 0px 0px;
+}
+
+.settings-colorinput {
+    padding : 0px 0px 0px 0px;
+}
+
+.settings-slider {
+    padding : 10px 0px 0px 0px;
+}
+
+.content-grid {
+    padding: 10px;
+}
+
+.file-uploader {
+    width : 100%;
+    height : 60px;
+    line-height : 60px;
+    border-width : 1px;
+    border-style : dashed;
+    border-radius : 5px;
+    text-align : center;
+    margin : 10px 0px 10px 0px;
+    cursor : pointer;
+}
+
+.file-select {
+    margin : 10px 0px 20px 0px;
+}
+
+.window-slider {
+    padding: 10px 0px 0px 50px;
+}
+
+.fit-button {
+    margin : 10px 0px 20px 0px
+}
+
+.export-button {
+    margin : 10px 0px 13px 10px;
+}
+
+.graph-components {
+    padding : 10px 0px 0px 50px;
+}
+
+.mantine-TextInput-input {
+    font-family : monospace;
+}
+
+.confidence-level {
+    padding : 0px 0px 10px 0px;
+}
+
+.switches-group {
+    padding : 10px 0px 10px 10px;
+}
+
+.y-axis-div {
+    margin : 0px 10px 0px 10px;
+}
+
+.vertical-divider {
+    margin : 28px 0px 0px 0px;
+    height : 40;
+}
+
+.number-icon {
+    padding : 0px 0px 15px 0px;
+}
+
+.parameters-grid-column {
+    margin : 10px 0px 0px 0px;
+}
+
+.manual-parameters-title {
+    padding : 0px 0px 5px 0px;
+}
+
+.summary-table {
+    margin: 0px 0px 0px 0px;
+}
+
+.fits-table {
+    margin : 10px 30px 20px 0px;
+}
+
+.save-button {
+    margin : 10px 0px 0px 0px;
+}
+
+.adjustment-column {
+    padding : 10px 10px 0px 10px;
+}
+
+.plot {
+    height : 350px;
+}
+
+.manual-parameter-button {
+    padding : 0px 5px 0px 5px;
+}
+
+.export-parameters-button {
+    margin : 10px 0px 20px 0px;  
+}
+
+.target-MTBF-input {
+    margin : 0px 0px 20px 0px;
+}
+
+.extrapolation-time {
+    margin : 0px 0px 20px 0px;
+}
+
+.select-fit {
+    padding : 0px 0px 10px 0px;
+}
+
+.select-dash {
+    padding : 10px 0px 10px 0px;
+}
+
+img[src*="#logo"] {
+    height : 20px;
+    padding : 0px 0px 0px 0px;
+}
