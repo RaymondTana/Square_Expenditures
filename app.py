@@ -10,6 +10,14 @@ SETTINGS_DRAWER_CHILDREN = [
         color = SWITCH_COLOR,
         checked = False,
     ),
+
+    dmc.DatePickerInput(
+        id = "datepicker",
+        label = "Start Date",
+        minDate = date(2020, 1, 1),
+        value = "2020-01-01", # or datetime.now().date()
+        w = 250,
+    ),
     
     # ColorInput for Bar fill
     dmc.ColorInput(
@@ -220,7 +228,7 @@ APP_CHILDREN = [
     ], id = 'tabs', value = 'Tool', color = TABS_COLOR),
 ]
 
-app = Dash(__name__, external_stylesheets = [EXTERNAL_CSS_SHEET])
+app = Dash(__name__, external_stylesheets = EXTERNAL_CSS_SHEETS)
 app.layout = html.Div(
     style = {'margin': '25px', 'padding': '10px'}, 
     children=[
@@ -258,9 +266,10 @@ clientside_callback(
     Input('search--button', 'n_clicks'),
     State('gmail-address--textinput', 'value'),
     State('app-password--textinput', 'value'),
+    State('datepicker', 'value'),
     prevent_initial_call = True,
 )
-def check_for_emails(n_clicks, username, password):
+def check_for_emails(n_clicks, username, password, start_date):
     try:         
 
         # set up IMAP connection and attempt login
@@ -271,13 +280,18 @@ def check_for_emails(n_clicks, username, password):
         mail.select(BUZON)
 
         # make query
-        typ, data = mail.search(None, f'(FROM "{SENDER}")')
-
-        # capture hits to the query
-        email_ids = data[0].split() 
+        search_criteria = f'(FROM "{SENDER}")'
+        if start_date:
+            imap_date = format_date_for_imap(start_date)
+            search_criteria = f'(FROM "{SENDER}" SINCE "{imap_date}")'
+            print(f"Searching for emails since {imap_date}")
+        
+        # Make query
+        typ, data = mail.search(None, search_criteria)
+        email_ids = data[0].split()
 
         extracted_messages = []
-        for eid in email_ids:
+        for eid in email_ids:  # limit to the last max_email_count emails
             # fetch individual email
             message = email.message_from_bytes(mail.fetch(eid, '(RFC822)')[1][0][1])
 

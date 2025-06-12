@@ -3,6 +3,7 @@ import imaplib
 import email
 from bs4 import BeautifulSoup
 import re
+from datetime import datetime, timedelta, date
 
 # Handling messages
 from inspect import stack
@@ -34,6 +35,7 @@ from dash import Dash, dcc, html, no_update, clientside_callback
 from dash.dependencies import Input, Output, State
 import dash.dependencies
 dash._dash_renderer._set_react_version(REACT_VERSION)
+EXTERNAL_CSS_SHEETS = ['/static/css/style.css', dmc.styles.DATES]
 
 # Helper function to format prices
 def to_price(x):
@@ -130,6 +132,17 @@ def create_dataframe_preview(df: pd.DataFrame):
     )
     
     return preview_table
+
+# Convert YYYY-MM-DD to DD-MMM-YYYY format for IMAP
+def format_date_for_imap(date_string):
+    if not date_string:
+        return None
+    
+    # Parse the date string
+    date_obj = datetime.strptime(date_string, '%Y-%m-%d')
+    
+    # Format for IMAP: DD-MMM-YYYY
+    return date_obj.strftime('%d-%b-%Y')
 
 # ------------------------ Markdown ------------------------
 

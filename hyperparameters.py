@@ -10,7 +10,6 @@ SENDER = 'messenger@messaging.squareup.com'
 BUZON = '"[Gmail]/All Mail"'
 
 """Local directory structure"""
-EXTERNAL_CSS_SHEET = '/static/css/style.css'
 MARKDOWN_HELP = 'assets/markdown/help.md'
 DARK_MODE_ICON = 'assets/icons/tdesign--mode-dark.svg'
 SETTINGS_ICON = 'assets/icons/solar--settings-linear.svg'
