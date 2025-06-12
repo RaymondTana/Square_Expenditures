@@ -274,22 +274,27 @@ def check_for_emails(n_clicks, username, password):
         typ, data = mail.search(None, f'(FROM "{SENDER}")')
 
         # capture hits to the query
-        email_ids = data[0].split()
-        messages = [
-            email.message_from_bytes(mail.fetch(eid, '(RFC822)')[1][0][1])
-            for eid in email_ids
-        ]
+        email_ids = data[0].split() 
+
+        extracted_messages = []
+        for eid in email_ids:
+            # fetch individual email
+            message = email.message_from_bytes(mail.fetch(eid, '(RFC822)')[1][0][1])
+
+            # extract data from email
+            email_data = extract_data_from_email(message)
+            extracted_messages.append(email_data)
+            del message
+        
         mail.logout()
 
-        # build the dataframe by parsing the emails emails
-        receipts_df = pd.DataFrame([
-            extract_data_from_email(message) for message in messages
-        ], columns = ['business_name', 'total_price', 'date'])
+        # build the dataframe by parsing the emails
+        receipts_df = pd.DataFrame(extracted_messages, columns = ['business_name', 'total_price', 'date'])
 
         # force the date format to be in a standard datetime format suitable for plotting
         receipts_df['datetime'] = pd.to_datetime(receipts_df['date'], format = 'mixed')
 
-        print(f'Found {len(messages)} emails from {SENDER}.')
+        print(f'Found {len(email_ids)} emails from {SENDER}.')
 
         # save the dataframe for use by other components
         return receipts_df.to_dict('records'), False, {'display': 'inline'}
